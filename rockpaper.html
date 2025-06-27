@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+    <script>
+        function rockPaperScissorGame() {
+            const choices = ["rock", "paper", "scissor"];
+            let userScore = 0;
+            let computerScore = 0;
+
+            for (let round = 1; round <= 5; round++) {
+                let userInput = prompt(`Round ${round}/5\nChoose: rock, paper, or scissor`);
+
+
+                if (userInput === null) {
+                    alert("Game cancelled.");
+                    return;
+                }
+                userInput = userInput.toLowerCase();
+                if (userInput != choices[0] && userInput != choices[1] && userInput != choices[2]) {
+                    alert("Invalid input. Please choose rock, paper, or scissor.");
+                    round--;
+                    continue;
+                }
+
+                const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+                let resultMessage = `You: ${userInput}\nComputer: ${computerChoice}\n`;
+
+                if (userInput === computerChoice) {
+                    resultMessage += "Result: It's a tie!";
+                } else if (
+                    (userInput === "rock" && computerChoice === "scissor") ||
+                    (userInput === "paper" && computerChoice === "rock") ||
+                    (userInput === "scissor" && computerChoice === "paper")
+                ) {
+                    resultMessage += "Result: You win this round!";
+                    userScore++;
+                } else {
+                    resultMessage += "Result: Computer wins this round!";
+                    computerScore++;
+                }
+
+                alert(resultMessage);
+            }
+
+            let finalResult = `Final Score:\nYou: ${userScore}\nComputer: ${computerScore}\n`;
+            if (userScore > computerScore) {
+                finalResult += "You won the game!";
+            } else if (computerScore > userScore) {
+                finalResult += "Computer won the game!";
+            } else {
+                finalResult += "It's a tie overall!";
+            }
+
+            alert(finalResult);
+        }
+
+        rockPaperScissorGame();
+    </script>
+</body>
+
+</html>
